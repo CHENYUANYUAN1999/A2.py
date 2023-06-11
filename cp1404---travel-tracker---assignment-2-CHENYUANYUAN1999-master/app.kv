@@ -1,0 +1,57 @@
+BoxLayout:
+    orientation: 'horizontal'
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_x: 0.25
+
+        Label:
+            text: "Sorted by: "
+
+        Spinner:
+            id: sorter_spinner
+            text: "Which type"
+            values: ("Visited Status", "Alphabetical", "Priority")
+            on_text: if sorter_spinner.text == "Priority": app.sorted_by_priority()
+            on_text: if sorter_spinner.text == "Alphabetical": app.sorted_by_alpha()
+            on_text: if sorter_spinner.text == "Visited": app.sorted_by_visit_status()
+
+        Label:
+            text: "Add New Place..."
+
+        Label:
+            text: "Name:"
+        TextInput:
+            id: input_name
+
+        Label:
+            text: "Country"
+        TextInput:
+            id: input_country
+
+        Label:
+            text: "Priority"
+        TextInput:
+            id: input_priority
+
+        Button:
+            text:"Add place"
+            on_press: app.add_place()
+        Button:
+            text: "Clear"
+            on_press: app.clear_input()
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            size_hint_y: 0.1
+            text: "Places to visit: " + app.top_status_text
+            id: count_unvisited_place
+
+        BoxLayout:
+            size_hint_y: 1
+            id: entry_box
+            orientation: "vertical"
+
+        Label:
+            size_hint_y: 0.1
+            text: app.bottom_status_text
